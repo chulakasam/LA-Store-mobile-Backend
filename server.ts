@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import dotenv from "dotenv";
 import cors from 'cors';
 import authRoutes from "./route/auth-routes";
+import paymentRoutes from "./route/payment-routes";
 
 dotenv.config();
 const app = express();
@@ -20,7 +21,7 @@ app.use(express.json());
 
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'http://localhost:8081',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -29,6 +30,7 @@ app.use(cors({
 
 
 app.use('/auth',authRoutes);
+app.use('/payment',paymentRoutes);
 
 app.use('*', (req, res) => {
     res.status(404).json({ message: 'Not Found' });
